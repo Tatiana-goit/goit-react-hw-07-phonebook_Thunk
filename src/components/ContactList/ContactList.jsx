@@ -1,11 +1,16 @@
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteContact } from '../../redux/slices/contact';
-import { getFiltredContacts} from '../../redux/phone-selector';
+import { getFiltredContacts } from '../../redux/phone-selector';
+import { fetchContacts, deleteContact } from '../../redux/phone-operations';
 import s from './ContactList.module.css';
 
 export default function ContactList() {
   const contacts = useSelector(getFiltredContacts);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
   return (
     <ul className={s.list}>

@@ -30,11 +30,6 @@ const contactReducer = combineReducers({
 const persisteContactReducer = persistReducer(persistConfig, contactReducer);
 
 
-// const rootReducer = {
-//   contacts,
-//   filter,
-// };
-
 export const store = configureStore({
   reducer: persisteContactReducer,
   middleware: getDefaultMiddleware =>
@@ -43,7 +38,6 @@ export const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     })
-    // .concat(logger),
 });
 
 

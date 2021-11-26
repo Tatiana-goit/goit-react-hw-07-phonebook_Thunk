@@ -1,9 +1,7 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { addContact } from '../../redux/slices/contact';
+import { useSelector, useDispatch } from 'react-redux';
+import { addContact } from '../../redux/phone-operations';
 import { getContacts } from '../../redux/phone-selector';
-import { v4 as uuidv4 } from 'uuid';
 import s from './ContactForm.module.css';
 
 export default function Form() {
@@ -11,7 +9,7 @@ export default function Form() {
   const [number, setNumber] = useState('');
   const contacts = useSelector(getContacts);
   const dispatch = useDispatch();
- 
+
   const handleChange = e => {
     const { name, value } = e.currentTarget;
     switch (name) {
@@ -28,7 +26,7 @@ export default function Form() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const id = uuidv4();
+
     const comparableElement = contacts.some(
       element => element.name.toLowerCase() === name.toLowerCase(),
     );
@@ -36,7 +34,7 @@ export default function Form() {
       resetForm();
       return alert(`${name} is already in the directory`);
     }
-    dispatch(addContact({ id, name, number }));
+    dispatch(addContact({ name, number }));
     resetForm();
   };
 
